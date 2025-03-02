@@ -10,69 +10,78 @@ class Program
     {
         while (true)
         {
-            Console.WriteLine("Menu:");
-            Console.WriteLine("1. Kama Sutra Cipher");
-            Console.WriteLine("2. Monoalphabetic Cipher");
-            Console.WriteLine("3. Vernam Cipher");
-            Console.WriteLine("4. Exit");
-            Console.Write("Enter your choice: ");
-            int choice = int.Parse(Console.ReadLine());
-
-            if (choice == 4)
-                break;
-
-            Console.WriteLine();
-            Console.WriteLine("Choose:");
-            Console.WriteLine("1. Encryption");
-            Console.WriteLine("2. Decryption");
-            Console.WriteLine("3. Go back");
-            Console.Write("Enter your choice: ");
-            int subChoice = int.Parse(Console.ReadLine());
-
-            if (subChoice == 3)
-                continue;
-
-            Console.WriteLine();
-            Console.Write("Enter text: ");
-            string text = Console.ReadLine();
-
-            switch (choice)
+            try
             {
-                case 1:
-                    Dictionary<char, char> kamaKey = GenerateKamaSutraKey();
-                    if (subChoice == 1)
-                        Console.WriteLine("Encrypted: " + KamaSutraCipher(text, kamaKey));
-                    else if (subChoice == 2)
-                        Console.WriteLine("Decrypted: " + KamaSutraCipher(text, kamaKey));
+                Console.WriteLine("Menu:");
+                Console.WriteLine("1. Kama Sutra Cipher");
+                Console.WriteLine("2. Monoalphabetic Cipher");
+                Console.WriteLine("3. Vernam Cipher");
+                Console.WriteLine("4. Exit");
+                Console.Write("Enter your choice: ");
+                int choice = int.Parse(Console.ReadLine());
+
+                if (choice == 4)
                     break;
-                case 2:
-                    string monoKey = GenerateMonoalphabeticKey();
-                    if (subChoice == 1)
-                        Console.WriteLine("Encrypted: " + MonoalphabeticCipher(text, monoKey));
-                    else if (subChoice == 2)
-                    {
-                        Console.Write("Enter Monoalphabetic Key: ");
-                        string monoKeyDec = Console.ReadLine();
-                        Console.WriteLine("Decrypted: " + MonoalphabeticDecipher(text, monoKeyDec));
-                    }
-                    break;
-                case 3:
-                    if (subChoice == 1)
-                    {
-                        string vernamKey = GenerateVernamKey(text.Length);
-                        Console.WriteLine("Key: " + vernamKey);
-                        Console.WriteLine("Encrypted: " + VernamCipher(text, vernamKey));
-                    }
-                    else if (subChoice == 2)
-                    {
-                        Console.Write("Enter Vernam Key: ");
-                        string vernamKeyDec = Console.ReadLine();
-                        Console.WriteLine("Decrypted: " + VernamCipher(text, vernamKeyDec));
-                    }
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice.");
-                    break;
+
+                Console.WriteLine("Choose:");
+                Console.WriteLine("1. Encryption");
+                Console.WriteLine("2. Decryption");
+                Console.WriteLine("3. Go back");
+                Console.Write("Enter your choice: ");
+                int subChoice = int.Parse(Console.ReadLine());
+
+                if (subChoice == 3)
+                    continue;
+
+                Console.Write("Enter text: ");
+                string text = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case 1:
+                        Dictionary<char, char> kamaKey = GenerateKamaSutraKey();
+                        if (subChoice == 1)
+                            Console.WriteLine("Encrypted: " + KamaSutraCipher(text, kamaKey));
+                        else if (subChoice == 2)
+                            Console.WriteLine("Decrypted: " + KamaSutraCipher(text, kamaKey));
+                        break;
+                    case 2:
+                        string monoKey = GenerateMonoalphabeticKey();
+                        if (subChoice == 1)
+                            Console.WriteLine("Encrypted: " + MonoalphabeticCipher(text, monoKey));
+                        else if (subChoice == 2)
+                        {
+                            Console.Write("Enter Monoalphabetic Key: ");
+                            string monoKeyDec = Console.ReadLine();
+                            Console.WriteLine("Decrypted: " + MonoalphabeticDecipher(text, monoKeyDec));
+                        }
+                        break;
+                    case 3:
+                        if (subChoice == 1)
+                        {
+                            string vernamKey = GenerateVernamKey(text.Length);
+                            Console.WriteLine("Key: " + vernamKey);
+                            Console.WriteLine("Encrypted: " + VernamCipher(text, vernamKey));
+                        }
+                        else if (subChoice == 2)
+                        {
+                            Console.Write("Enter Vernam Key: ");
+                            string vernamKeyDec = Console.ReadLine();
+                            Console.WriteLine("Decrypted: " + VernamCipher(text, vernamKeyDec));
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        break;
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
             }
         }
     }
