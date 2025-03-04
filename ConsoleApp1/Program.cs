@@ -12,7 +12,7 @@ namespace CryptoProgram
                 try
                 {
                     Console.WriteLine("Menu:");
-                    Console.WriteLine("1. Kama Sutra Cipher");
+                    Console.WriteLine(  "1. Kama Sutra Cipher");
                     Console.WriteLine("2. Monoalphabetic Cipher");
                     Console.WriteLine("3. Vernam Cipher");
                     Console.WriteLine("4. Exit");
